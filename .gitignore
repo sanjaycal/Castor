@@ -1,0 +1,6 @@
+castor/*
+.env
+*.txt
+*.pdf
+*API_KEY
+preprocess.py

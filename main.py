@@ -85,6 +85,9 @@ async def on_ready():
     print(client.user)
 
 async def answer(textbook, message):
+    T = open("logs.txt", "a")
+    T.write(message.author + "\n")
+    T.write(message.content + "\n\n\n------------------------")
     thread = await message.channel.create_thread(name = message.content[4:], type = discord.ChannelType.public_thread)
     await thread.send("The bot is slow, please wait up to 2 minutes for a response(I fed it the entire textbook)")
     GR = ask(message.content[4:], textbook).split("\n")
@@ -105,15 +108,25 @@ async def on_message(message):
         return
     try:
         if message.content.startswith('?140'):
+            textbook140 = genai.upload_file("/home/san/140.txt", display_name="ECE140Textbook")
             await answer(textbook140, message)
         if message.content.startswith('?124'):
+            textbook124 = genai.upload_file("/home/san/124.txt", display_name="ECE124Textbook")
             await answer(textbook124, message)
         if message.content.startswith('?106'):
+            textbook106 = genai.upload_file("/home/san/106.txt", display_name="ECE106Textbook")
             await answer(textbook106, message)
         if message.content.startswith('?119'):
+            textbook119 = genai.upload_file("/home/san/119.txt", display_name="ECE119Textbook")
             await answer(textbook119, message)
         if message.content.startswith('?108'):
+            textbook108 = genai.upload_file("/home/san/108.txt", display_name="ECE108Textbook")
             await answer(textbook108, message)
+        if message.content.startswith('?240'):
+            textbook240 = genai.upload_file("/home/san/240.txt", display_name="ECE240Textbook")
+            await answer(textbook240, message)
+        if message.content.startswith("?help"):
+            await message.reply("The supported courses are ")
     except Exception as e:
         print(e)
         await message.reply("ERROR OCCURED")
